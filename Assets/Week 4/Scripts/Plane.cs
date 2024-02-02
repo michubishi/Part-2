@@ -1,25 +1,32 @@
-using Microsoft.Unity.VisualStudio.Editor;
-using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Plane : MonoBehaviour
 {
+    public GameObject runway;
     public List<Vector2> points;
     public float newPointThreshold = 0.2f;
-    Vector2 lastPosition;
-    LineRenderer lineRenderer;
-    Rigidbody2D rigidbody;
+
     Vector2 currentPosition;
+    Vector2 lastPosition;
+   
+    LineRenderer lineRenderer;
+    SpriteRenderer spriteRenderer;
+    Rigidbody2D rigidbody;
+    BoxCollider2D RWboxcollider;
+    Runway RWScript;
+
     public float speed = 1;
     public AnimationCurve landing;
     float timerValue;
+
     public Sprite[] sprites = new Sprite[4];
-    SpriteRenderer spriteRenderer;
+
+    bool isLanding = false;
 
     private void Start()
     {
+        runway = GameObject.Find("Runway");  
         spriteRenderer = GetComponent<SpriteRenderer>();
         lineRenderer = GetComponent<LineRenderer>();
         lineRenderer.positionCount = 1;
@@ -30,6 +37,9 @@ public class Plane : MonoBehaviour
         speed = Random.Range(1, 3);
         int spriteRandSelect = Random.Range(0, 3);
         spriteRenderer.sprite = sprites[spriteRandSelect];
+
+        RWboxcollider = runway.GetComponent<BoxCollider2D>();
+        RWScript = runway.GetComponent<Runway>();
     }
 
     private void FixedUpdate()
@@ -47,7 +57,8 @@ public class Plane : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKey(KeyCode.Space))
+        isLanding = RWboxcollider.OverlapPoint(transform.position);
+        if (isLanding)
         {
             timerValue += 0.5f * Time.deltaTime;
             float interpolation = landing.Evaluate(timerValue);
@@ -55,6 +66,7 @@ public class Plane : MonoBehaviour
             if(transform.localScale.z < 0.1f)
             {
                 Destroy(gameObject);
+                RWScript.addScore();
             }
 
             transform.localScale = Vector3.Lerp(Vector3.one*3, Vector3.zero, interpolation);
@@ -104,7 +116,7 @@ public class Plane : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (Vector3.Distance(transform.position, collision.transform.position) < 1)
+        if (Vector3.Distance(transform.position, collision.transform.position) < 1 && collision.name.Contains("Plane"))
         {
             Destroy(this.gameObject);
         }
