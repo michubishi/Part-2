@@ -16,10 +16,11 @@ public class Plane : MonoBehaviour
     public AnimationCurve landing;
     float timerValue;
     public Sprite[] sprites = new Sprite[4];
+    SpriteRenderer spriteRenderer;
 
     private void Start()
     {
-        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
         lineRenderer = GetComponent<LineRenderer>();
         lineRenderer.positionCount = 1;
         lineRenderer.SetPosition(0, transform.position);
@@ -73,6 +74,11 @@ public class Plane : MonoBehaviour
                 lineRenderer.positionCount--;
             }
         }
+
+        if(Camera.main.WorldToScreenPoint(transform.position).x < 0 || Camera.main.WorldToScreenPoint(transform.position).x > Screen.width || Camera.main.WorldToScreenPoint(transform.position).y < 0 || Camera.main.WorldToScreenPoint(transform.position).y > Screen.height)
+        {
+            Destroy(this.gameObject);
+        }
     }
 
     private void OnMouseDown()
@@ -94,6 +100,24 @@ public class Plane : MonoBehaviour
             lastPosition = newPosition;
         }
 
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (Vector3.Distance(transform.position, collision.transform.position) < 1)
+        {
+            Destroy(this.gameObject);
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        spriteRenderer.color = Color.red;
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        spriteRenderer.color = Color.white;
     }
 
 }
