@@ -1,3 +1,4 @@
+using Microsoft.Unity.VisualStudio.Editor;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -14,14 +15,20 @@ public class Plane : MonoBehaviour
     public float speed = 1;
     public AnimationCurve landing;
     float timerValue;
+    public Sprite[] sprites = new Sprite[4];
 
     private void Start()
     {
+        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
         lineRenderer = GetComponent<LineRenderer>();
         lineRenderer.positionCount = 1;
         lineRenderer.SetPosition(0, transform.position);
-        
         rigidbody = GetComponent<Rigidbody2D>();
+        transform.position = new Vector3(Random.Range(-5, 5), Random.Range(-5, 5), 0);
+        transform.Rotate(0, 0, Random.Range(0, 360));
+        speed = Random.Range(1, 3);
+        int spriteRandSelect = Random.Range(0, 3);
+        spriteRenderer.sprite = sprites[spriteRandSelect];
     }
 
     private void FixedUpdate()
@@ -49,7 +56,7 @@ public class Plane : MonoBehaviour
                 Destroy(gameObject);
             }
 
-            transform.localScale = Vector3.Lerp(Vector3.one, Vector3.zero, interpolation);
+            transform.localScale = Vector3.Lerp(Vector3.one*3, Vector3.zero, interpolation);
         }
 
         lineRenderer.SetPosition(0, transform.position);
