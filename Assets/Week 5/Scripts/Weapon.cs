@@ -14,7 +14,7 @@ public class Weapon : MonoBehaviour
     void Start()
     {
         rigidbody = GetComponent<Rigidbody2D>();
-        direction.x = 1;
+        direction.y = 1;
     }
 
     // Update is called once per frame
@@ -31,7 +31,7 @@ public class Weapon : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        collision.gameObject.SendMessage("TakeDamage", 1);
+        collision.gameObject.SendMessage("TakeDamage", 1, SendMessageOptions.DontRequireReceiver);
         Destroy(this.gameObject);
     }
 }
