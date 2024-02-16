@@ -19,7 +19,9 @@ public class Knight : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-        health = maxHealth;
+        health = PlayerPrefs.GetFloat("currentHealth", maxHealth);
+        SendMessage("setSlider", health);
+        TakeDamage(0);
     }
 
     private void FixedUpdate()
@@ -69,6 +71,7 @@ public class Knight : MonoBehaviour
     {
         health -= damage;
         health = Mathf.Clamp(health, 0, maxHealth);
+        PlayerPrefs.SetFloat("currentHealth", health);
         if(health == 0)
         {
             isDead = true;
