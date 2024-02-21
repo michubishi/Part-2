@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
+using UnityEngine.SceneManagement;
 
 public class GhostSpawner : MonoBehaviour
 {
@@ -16,6 +17,11 @@ public class GhostSpawner : MonoBehaviour
         if (CurrentGhost == null) //if there is no ghost on the screen
         {
             spawnGhost(); //spawn a ghost
+        }
+
+        if(points == -1) //if the points equal -1 (because the starting point is 0)
+        {
+            gameOver(); //game over
         }
     }
 
@@ -44,6 +50,11 @@ public class GhostSpawner : MonoBehaviour
     {
         points--;
         Debug.Log(points);
+    }
+
+    void gameOver() //method is called when the player loses
+    {
+        SceneManager.LoadScene(5); //load the gameover scene
     }
 }
 
