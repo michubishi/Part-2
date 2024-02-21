@@ -4,36 +4,34 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Unity.VisualScripting;
+using JetBrains.Annotations;
 
 public class Door : MonoBehaviour
 {
-    float points;
     public string doorColour;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    public GameObject GhostSpawner;
     private void OnMouseOver()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0)) //when left mouse button is clicked
         {
-            Debug.Log(doorColour + " Door colour was clicked");
-            //send message to ghost 
+            int ghostType = GhostSpawner.GetComponent<GhostSpawner>().getGhostType(); //refer to what kind of ghost it is
+            if (ghostType == 0 && doorColour == "Blue") //if the ghost is blue and the player clicks the blue door
+            {
+                GhostSpawner.SendMessage("addPoint"); //add a point
+            }
 
-            //if the ghost belongs to the blue door
-                //add a point
-            //if the ghost belogs to the red door
-                //add a point
-            //if it does not belong
-            //subtract a point
+            else if (ghostType == 1 && doorColour == "Red") //if the ghost is red and the player clicks the red door
+            {
+                GhostSpawner.SendMessage("addPoint"); //add a point
+            }
+
+            else //if the player gets the door wrong
+            {
+                GhostSpawner.SendMessage("removePoint"); //remove a point
+            }
+            GhostSpawner.SendMessage("MoveGhost", this.gameObject); //tell the current ghost to move
+
+        }
         }
     }
-}
+
