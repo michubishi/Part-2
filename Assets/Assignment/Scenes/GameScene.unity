@@ -989,7 +989,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1252344098}
   - component: {fileID: 1252344097}
-  - component: {fileID: 1252344101}
   - component: {fileID: 1252344100}
   - component: {fileID: 1252344099}
   m_Layer: 0
@@ -1129,33 +1128,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!50 &1252344101
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1252344096}
-  m_BodyType: 1
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!1 &1255593130
 GameObject:
   m_ObjectHideFlags: 0
@@ -1167,7 +1139,6 @@ GameObject:
   - component: {fileID: 1255593132}
   - component: {fileID: 1255593131}
   - component: {fileID: 1255593135}
-  - component: {fileID: 1255593134}
   - component: {fileID: 1255593133}
   m_Layer: 0
   m_Name: Blue Door
@@ -1261,33 +1232,6 @@ MonoBehaviour:
   doorColour: Blue
   GhostSpawner: {fileID: 1818371136}
   Angel: {fileID: 344798388}
---- !u!50 &1255593134
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1255593130}
-  m_BodyType: 1
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!61 &1255593135
 BoxCollider2D:
   m_ObjectHideFlags: 0
