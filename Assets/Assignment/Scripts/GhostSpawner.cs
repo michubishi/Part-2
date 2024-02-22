@@ -5,11 +5,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class GhostSpawner : MonoBehaviour
 {
     public GameObject GhostPrefab;
     public GameObject CurrentGhost;
+    public TextMeshProUGUI scoreText;
     float points = 0;
 
     private void Update()
@@ -23,6 +25,8 @@ public class GhostSpawner : MonoBehaviour
         {
             gameOver(); //game over
         }
+
+        scoreText.text = "Total score: " + points.ToString(); //Display score on screen
     }
 
     void spawnGhost() //this method creates a ghost.
