@@ -8,13 +8,16 @@ using Unity.VisualScripting;
 public class Player : MonoBehaviour
 {
     SpriteRenderer spriteRenderer;
+    Rigidbody2D rigidbody;
     public Color selectedColor;
     public Color unselectedColor;
+    public float speed = 500;
     bool isSelected;
     // Start is called before the first frame update
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        rigidbody = GetComponent<Rigidbody2D>();
         Selected(false);
     }
 
@@ -42,4 +45,8 @@ public class Player : MonoBehaviour
         }
     }
 
+    public void Move(Vector2 direction)
+    {
+        rigidbody.AddForce(direction * speed);
+    }
 }
