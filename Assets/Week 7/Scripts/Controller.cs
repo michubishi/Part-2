@@ -3,13 +3,16 @@ using UnityEngine.EventSystems;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class Controller : MonoBehaviour
 {
     public Slider chargeSlider;
     float charge;
     public float maxCharge = 1;
+    public static float score;
     Vector2 direction;
+    
     public static Player SelectedPlayer { get; private set; }
     public static void SetSelectedPlayer (Player player)
     {
@@ -19,6 +22,11 @@ public class Controller : MonoBehaviour
         }
         SelectedPlayer = player;
         SelectedPlayer.Selected(true);
+    }
+
+    public static void DisplayScore(TextMeshProUGUI text)
+    {
+        text.text = "Score: " + score.ToString();
     }
 
     private void FixedUpdate()
